@@ -1,9 +1,12 @@
+// src/App.jsx
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import UserDashboard from './components/UserDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import MechanicDashboard from './components/MechanicDashboard';
+import SuperAdminDashboard from './components/SuperAdmin'; // Correct import here
 import ErrorBoundary from './components/ErrorBoundary'; // Error Boundary
 import './index.css'; // Tailwind CSS
 
@@ -24,6 +27,9 @@ const App = () => {
 
             {/* Mechanic Dashboard Route */}
             <Route path="/mechanic-dashboard" element={<MechanicDashboard />} />
+
+            {/* Super Admin Dashboard Route */}
+            <Route path="/super-admin-dashboard" element={<SuperAdminDashboard />} /> {/* Super Admin Route */}
 
             {/* Optional: Catch-all for 404 errors */}
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />

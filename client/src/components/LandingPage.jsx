@@ -7,7 +7,74 @@ import mechanicImage from '../assets/mechanic.jpg';
 import batteryImage from '../assets/battery-replacement-1160x773.jpeg';
 import careEmergencyImage from '../assets/caremergency.avif';
 import safetyInspectionImage from '../assets/Safety-Inspection.jpg';
-import tyreServiceImage from '../assets/tyreservice.jpg'; // Import the new image
+import tyreServiceImage from '../assets/tyreservice.jpg';
+
+// FontAwesome Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
+const services = [
+  {
+    title: 'Towing Service',
+    image: towingImage,
+    description: 'We offer reliable towing services for all types of vehicles, including flatbed and hook & chain trucks.',
+  },
+  {
+    title: 'Mechanical Service',
+    image: mechanicImage,
+    description: 'From engine repairs to regular maintenance, we provide comprehensive mechanical services to get your car back on the road.',
+  },
+  {
+    title: 'Emergency Assistance',
+    image: careEmergencyImage,
+    description: 'Our team is available 24/7 for emergency roadside assistance, including battery replacements and fuel delivery.',
+  },
+  {
+    title: 'Battery Replacement',
+    image: batteryImage,
+    description: 'Quick and efficient battery replacements for any type of vehicle, available on-site.',
+  },
+  {
+    title: 'Car Inspection',
+    image: safetyInspectionImage,
+    description: 'Thorough vehicle inspections to ensure your car is in top condition and ready for the road.',
+  },
+  {
+    title: 'Tyre Service',
+    image: tyreServiceImage,
+    description: 'We provide tyre fitting, repairs, and replacements for all vehicle types. Stay safe on the road with our quality tyre services.',
+  },
+];
+
+const testimonials = [
+  {
+    text: "This towing service saved me in a pinch! Quick, reliable, and professional. Highly recommended!",
+    author: "Steve John",
+    role: "Satisfied Customer"
+  },
+  {
+    text: "Amazing service! They arrived quickly and solved my battery issue right on the spot. Highly recommend!",
+    author: "Jane Smith",
+    role: "Happy Client"
+  },
+  // Add more testimonials as needed
+];
+
+const ServiceCard = ({ title, image, description }) => (
+  <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
+    <h3 className="text-xl font-semibold text-yellow-400">{title}</h3>
+    <img src={image} alt={title} className="w-full h-60 object-cover rounded-lg mt-4" />
+    <p className="text-gray-300 mt-2">{description}</p>
+  </div>
+);
+
+const TestimonialCard = ({ text, author, role }) => (
+  <div className="mt-6 p-6 bg-gray-800 rounded-lg shadow-lg text-center">
+    <p className="text-gray-300">"{text}"</p>
+    <h4 className="text-yellow-400 mt-4">{author}</h4>
+    <p className="text-gray-500">{role}</p>
+  </div>
+);
 
 const LandingPage = () => {
   return (
@@ -17,24 +84,10 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-semibold text-white">Towing Services</h1>
           <div className="space-x-6">
-            <Link
-              to="/user-dashboard"
-              className="text-gray-200 hover:text-white transition duration-200"
-            >
-              User Dashboard
-            </Link>
-            <Link
-              to="/admin-dashboard"
-              className="text-gray-200 hover:text-white transition duration-200"
-            >
-              Admin Dashboard
-            </Link>
-            <Link
-              to="/mechanic-dashboard"
-              className="text-gray-200 hover:text-white transition duration-200"
-            >
-              Mechanic Dashboard
-            </Link>
+            <Link to="/user-dashboard" className="text-gray-200 hover:text-white">User Dashboard</Link>
+            <Link to="/admin-dashboard" className="text-gray-200 hover:text-white">Admin Dashboard</Link>
+            <Link to="/mechanic-dashboard" className="text-gray-200 hover:text-white">Mechanic Dashboard</Link>
+            <Link to="/super-admin-dashboard" className="text-gray-200 hover:text-white">Super Admin Dashboard</Link>
           </div>
         </div>
       </nav>
@@ -49,93 +102,29 @@ const LandingPage = () => {
         <div className="mt-12">
           <h2 className="text-2xl font-semibold text-center text-white">Our Services</h2>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {/* Towing Service */}
-            <div className="p-6 bg-gray-800 rounded-lg shadow-lg flex flex-col">
-              <h3 className="text-xl font-semibold text-yellow-400">Towing Service</h3>
-              <img
-                src={towingImage}
-                alt="Towing Service"
-                className="w-full h-60 object-cover rounded-lg mt-4"
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                title={service.title}
+                image={service.image}
+                description={service.description}
               />
-              <p className="text-gray-300 mt-2">
-                We offer reliable towing services for all types of vehicles, including flatbed and hook & chain trucks.
-              </p>
-            </div>
-
-            {/* Mechanical Service */}
-            <div className="p-6 bg-gray-800 rounded-lg shadow-lg flex flex-col">
-              <h3 className="text-xl font-semibold text-yellow-400">Mechanical Service</h3>
-              <img
-                src={mechanicImage}
-                alt="Mechanical Service"
-                className="w-full h-60 object-cover rounded-lg mt-4"
-              />
-              <p className="text-gray-300 mt-2">
-                From engine repairs to regular maintenance, we provide comprehensive mechanical services to get your car back on the road.
-              </p>
-            </div>
-
-            {/* Emergency Assistance */}
-            <div className="p-6 bg-gray-800 rounded-lg shadow-lg flex flex-col">
-              <h3 className="text-xl font-semibold text-yellow-400">Emergency Assistance</h3>
-              <img
-                src={careEmergencyImage}
-                alt="Emergency Assistance"
-                className="w-full h-60 object-cover rounded-lg mt-4"
-              />
-              <p className="text-gray-300 mt-2">
-                Our team is available 24/7 for emergency roadside assistance, including battery replacements and fuel delivery.
-              </p>
-            </div>
-
-            {/* Battery Replacement */}
-            <div className="p-6 bg-gray-800 rounded-lg shadow-lg flex flex-col">
-              <h3 className="text-xl font-semibold text-yellow-400">Battery Replacement</h3>
-              <img
-                src={batteryImage}
-                alt="Battery Replacement"
-                className="w-full h-60 object-cover rounded-lg mt-4"
-              />
-              <p className="text-gray-300 mt-2">
-                Quick and efficient battery replacements for any type of vehicle, available on-site.
-              </p>
-            </div>
-
-            {/* Car Inspection */}
-            <div className="p-6 bg-gray-800 rounded-lg shadow-lg flex flex-col">
-              <h3 className="text-xl font-semibold text-yellow-400">Car Inspection</h3>
-              <img
-                src={safetyInspectionImage}
-                alt="Car Inspection"
-                className="w-full h-60 object-cover rounded-lg mt-4"
-              />
-              <p className="text-gray-300 mt-2">
-                Thorough vehicle inspections to ensure your car is in top condition and ready for the road.
-              </p>
-            </div>
-
-            {/* Tyre Service */}
-            <div className="p-6 bg-gray-800 rounded-lg shadow-lg flex flex-col">
-              <h3 className="text-xl font-semibold text-yellow-400">Tyre Service</h3>
-              <img
-                src={tyreServiceImage}
-                alt="Tyre Service"
-                className="w-full h-60 object-cover rounded-lg mt-4"
-              />
-              <p className="text-gray-300 mt-2">
-                We provide tyre fitting, repairs, and replacements for all vehicle types. Stay safe on the road with our quality tyre services.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
 
         {/* Client Testimonial Section */}
         <section className="mt-12">
           <h2 className="text-2xl font-semibold text-center text-white">What Our Clients Say</h2>
-          <div className="mt-6 p-6 bg-gray-800 rounded-lg shadow-lg">
-            <p className="text-gray-300">"This towing service saved me in a pinch! Quick, reliable, and professional. Highly recommended!"</p>
-            <h4 className="text-yellow-400 mt-4">Steve John</h4>
-            <p className="text-gray-500">Satisfied Customer</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCard
+                key={index}
+                text={testimonial.text}
+                author={testimonial.author}
+                role={testimonial.role}
+              />
+            ))}
           </div>
         </section>
       </main>
@@ -145,19 +134,18 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-6 text-center text-gray-400">
           <p>&copy; 2024 Towing Services. All rights reserved.</p>
           <div className="mt-4 space-x-6">
-            <a href="mailto:contact@towingservices.com" className="text-gray-200 hover:text-white">Email Us</a>
-            <a href="tel:+1234567890" className="text-gray-200 hover:text-white">Call Us</a>
+            <a href="mailto:contact@towingservices.com" className="text-gray-200 hover:text-white" aria-label="Email us">Email Us</a>
+            <a href="tel:+1234567890" className="text-gray-200 hover:text-white" aria-label="Call us">Call Us</a>
           </div>
-          <div className="mt-4 space-x-6">
-            {/* Social Media Icons */}
-            <a href="https://facebook.com/towingservices" className="text-gray-200 hover:text-white">
-              <i className="fab fa-facebook"></i> Facebook
+          <div className="mt-4 space-x-6 flex justify-center">
+            <a href="https://facebook.com/towingservices" className="text-gray-200 hover:text-white" aria-label="Facebook">
+              <FontAwesomeIcon icon={faFacebook} size="lg" />
             </a>
-            <a href="https://twitter.com/towingservices" className="text-gray-200 hover:text-white">
-              <i className="fab fa-twitter"></i> Twitter
+            <a href="https://twitter.com/towingservices" className="text-gray-200 hover:text-white" aria-label="Twitter">
+              <FontAwesomeIcon icon={faTwitter} size="lg" />
             </a>
-            <a href="https://instagram.com/towingservices" className="text-gray-200 hover:text-white">
-              <i className="fab fa-instagram"></i> Instagram
+            <a href="https://instagram.com/towingservices" className="text-gray-200 hover:text-white" aria-label="Instagram">
+              <FontAwesomeIcon icon={faInstagram} size="lg" />
             </a>
           </div>
         </div>
