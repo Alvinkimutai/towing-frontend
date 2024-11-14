@@ -8,6 +8,8 @@ import AdminDashboard from './components/AdminDashboard';
 import MechanicDashboard from './components/MechanicDashboard';
 import SuperAdminDashboard from './components/SuperAdmin'; // Correct import here
 import ErrorBoundary from './components/ErrorBoundary'; // Error Boundary
+import SignUpPage from './components/SignUpPage';
+import LoginPage from './components/LoginPage';
 import './index.css'; // Tailwind CSS
 
 const App = () => {
@@ -18,6 +20,12 @@ const App = () => {
           <Routes>
             {/* Landing Page Route */}
             <Route path="/" element={<LandingPage />} />
+
+            {/* Sign up page */}
+            <Route path="/signup" element={<SignUpPage />} />
+
+            {/* Login page */}
+            <Route path="/login" element={<LoginPage />} /> {/* Fixed the prop to element */}
 
             {/* User Dashboard Route */}
             <Route path="/user-dashboard" element={<UserDashboard />} />
