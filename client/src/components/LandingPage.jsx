@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Import images
 import towingImage from '../assets/towing.jpg';
@@ -13,6 +13,7 @@ import tyreServiceImage from '../assets/tyreservice.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
+// Services Data
 const services = [
   {
     title: 'Towing Service',
@@ -46,6 +47,7 @@ const services = [
   },
 ];
 
+// Testimonials Data
 const testimonials = [
   {
     text: "This towing service saved me in a pinch! Quick, reliable, and professional. Highly recommended!",
@@ -60,6 +62,7 @@ const testimonials = [
   // Add more testimonials as needed
 ];
 
+// ServiceCard Component
 const ServiceCard = ({ title, image, description }) => (
   <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
     <h3 className="text-xl font-semibold text-yellow-400">{title}</h3>
@@ -68,6 +71,7 @@ const ServiceCard = ({ title, image, description }) => (
   </div>
 );
 
+// TestimonialCard Component
 const TestimonialCard = ({ text, author, role }) => (
   <div className="mt-6 p-6 bg-gray-800 rounded-lg shadow-lg text-center">
     <p className="text-gray-300">"{text}"</p>
@@ -76,21 +80,43 @@ const TestimonialCard = ({ text, author, role }) => (
   </div>
 );
 
+// Navbar Component
+const Navbar = () => {
+  const navigate = useNavigate();
+
+  const isAuthenticated = () => {
+    return localStorage.getItem('userToken'); // Example check for authentication
+  };
+
+  const handleDashboardClick = (role) => {
+    if (isAuthenticated()) {
+      navigate(`/${role}-dashboard`);
+    } else {
+      navigate(`/login?role=${role}`);
+    }
+  };
+
+  return (
+    <nav className="bg-gray-900 shadow-md">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 className="text-2xl font-semibold text-white">Towing Services</h1>
+        <div className="space-x-6">
+          <button onClick={() => handleDashboardClick('user')} className="text-gray-200 hover:text-white">User Dashboard</button>
+          <button onClick={() => handleDashboardClick('admin')} className="text-gray-200 hover:text-white">Admin Dashboard</button>
+          <button onClick={() => handleDashboardClick('mechanic')} className="text-gray-200 hover:text-white">Mechanic Dashboard</button>
+          <button onClick={() => handleDashboardClick('super-admin')} className="text-gray-200 hover:text-white">Super Admin Dashboard</button>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+// Main LandingPage Component
 const LandingPage = () => {
   return (
     <div className="bg-black text-white min-h-screen flex flex-col">
       {/* Navbar */}
-      <nav className="bg-gray-900 shadow-md">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-semibold text-white">Towing Services</h1>
-          <div className="space-x-6">
-            <Link to="/user-dashboard" className="text-gray-200 hover:text-white">User Dashboard</Link>
-            <Link to="/admin-dashboard" className="text-gray-200 hover:text-white">Admin Dashboard</Link>
-            <Link to="/mechanic-dashboard" className="text-gray-200 hover:text-white">Mechanic Dashboard</Link>
-            <Link to="/super-admin-dashboard" className="text-gray-200 hover:text-white">Super Admin Dashboard</Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <main className="flex-grow p-6">
         <header className="text-center py-12">
