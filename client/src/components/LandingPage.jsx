@@ -89,11 +89,8 @@ const Navbar = () => {
   };
 
   const handleDashboardClick = (role) => {
-    if (isAuthenticated()) {
-      navigate(`/${role}-dashboard`);
-    } else {
-      navigate(`/login?role=${role}`);
-    }
+    // Navigate to the sign-up page with the role as a query parameter
+    navigate(`/signup?role=${role}`);
   };
 
   return (

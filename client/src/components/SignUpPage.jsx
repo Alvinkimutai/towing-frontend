@@ -9,14 +9,14 @@ const SignUpPage = () => {
   // Extract the 'role' query parameter from the URL
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    setRole(queryParams.get('role'));
+    setRole(queryParams.get('role')); // Set the role from the query params
   }, [location]);
 
   const handleSignUp = () => {
     // Logic for sign-up (validation, API call)
     // On successful sign-up, store user data and redirect to the appropriate dashboard
     localStorage.setItem('userToken', 'new-user-token'); // Example token storage
-    navigate(`/${role}-dashboard`);
+    navigate(`/${role}-dashboard`); // Navigate to the specific dashboard
   };
 
   return (
